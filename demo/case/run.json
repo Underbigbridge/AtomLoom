@@ -1,0 +1,130 @@
+{
+  "status": "complete",
+  "frames": 320,
+  "first_frame": 0,
+  "last_frame": 319,
+  "stride": 1,
+  "time_unit": "ps",
+  "distance_unit": "nm",
+  "group_atom_counts": {
+    "li": 32,
+    "target_1": 64,
+    "target_2": 32,
+    "positive": 32,
+    "negative": 32
+  },
+  "versions": {
+    "MDAnalysis": "2.11.0",
+    "SciPy": "1.17.1",
+    "NumPy": "2.4.6"
+  },
+  "parameters": {
+    "groups": {
+      "li": "name LI",
+      "target_1": "name O",
+      "target_2": "name F",
+      "positive": "name LI",
+      "negative": "name F"
+    },
+    "descriptors": {
+      "composition": "Li / F / O \u5408\u6210\u6d4b\u8bd5\u7c92\u5b50",
+      "concentration": "Li:F:O = 1:1:2",
+      "architecture": "\u79bb\u6563\u7c92\u5b50\u6d4b\u8bd5\u76d2"
+    },
+    "frames": {
+      "start": 0,
+      "stride": 1
+    },
+    "plots": true,
+    "rdf": {
+      "O": {
+        "center": "li",
+        "target": "target_1",
+        "r_max_nm": 1,
+        "bins": 100,
+        "cutoff_search": {
+          "peak_range_nm": [
+            0.18,
+            0.32
+          ],
+          "minimum_range_nm": [
+            0.18,
+            0.76
+          ],
+          "smooth_bins": 7,
+          "prominence": 0.15
+        }
+      },
+      "F": {
+        "center": "li",
+        "target": "target_2",
+        "r_max_nm": 1,
+        "bins": 100,
+        "cutoff_search": {
+          "peak_range_nm": [
+            0.28,
+            0.55
+          ],
+          "minimum_range_nm": [
+            0.28,
+            1
+          ],
+          "smooth_bins": 7,
+          "prominence": 0.15
+        }
+      }
+    },
+    "coordination": {
+      "Li_environment": {
+        "center": "li",
+        "targets": {
+          "O": {
+            "group": "target_1",
+            "cutoff_nm": 0.38,
+            "count": "atom"
+          },
+          "F": {
+            "group": "target_2",
+            "cutoff_nm": 0.6,
+            "count": "atom"
+          }
+        },
+        "joint": [
+          [
+            "O",
+            "F"
+          ]
+        ]
+      }
+    },
+    "transport": {
+      "species": {
+        "cation": {
+          "group": "positive",
+          "entity": "atom",
+          "charge_e": 1
+        },
+        "anion": {
+          "group": "negative",
+          "entity": "atom",
+          "charge_e": -1
+        }
+      },
+      "reference": {
+        "kind": "lab"
+      },
+      "temperature_K": 300,
+      "positions": "tor",
+      "immobile_countercharge_e": 0,
+      "max_lag_ps": 120,
+      "fit_windows_ps": [
+        [
+          20,
+          100
+        ]
+      ],
+      "min_origins": 10,
+      "self_msd": true
+    }
+  }
+}
