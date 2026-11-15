@@ -1,0 +1,16 @@
+{
+  "frames": 320,
+  "centers": 32,
+  "center_entity": "atom",
+  "center_frames": 10240,
+  "contact_definition": {
+    "O": {
+      "cutoff_nm": 0.38,
+      "count": "atom"
+    },
+    "F": {
+      "cutoff_nm": 0.6,
+      "count": "atom"
+    }
+  }
+}

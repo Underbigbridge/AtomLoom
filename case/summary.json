@@ -1,0 +1,104 @@
+{
+  "frames": 320,
+  "transport": {
+    "species": [
+      "cation",
+      "anion"
+    ],
+    "populations": [
+      32,
+      32
+    ],
+    "charge_e": [
+      1.0,
+      -1.0
+    ],
+    "temperature_K": 300.0,
+    "mean_volume_nm3": 97.33600000000001,
+    "immobile_countercharge_e": 0.0,
+    "dt_ps": 1.0,
+    "frames": 320,
+    "axes": "xyz",
+    "reference": {
+      "kind": "lab"
+    },
+    "positions": "tor",
+    "fit_windows": [
+      {
+        "fit_ps": [
+          20.0,
+          100.0
+        ],
+        "lag_points": 81,
+        "charge_msd_slope_e2_nm2_ps": 0.09271032746450913,
+        "charge_msd_R2": 0.9966523276041243,
+        "charge_msd_loglog_exponent": 1.0544653921973401,
+        "sigma_S_m": 0.9838289994099676,
+        "sigma_mS_cm": 9.838289994099675,
+        "sigma_species_S_m": [
+          0.5400231850164241,
+          0.4438058143935435
+        ],
+        "sigma_matrix_S_m": [
+          [
+            0.42027704178746095,
+            0.11974614322896317
+          ],
+          [
+            0.11974614322896317,
+            0.32405967116458034
+          ]
+        ],
+        "cation_transference": 0.5488994381546921,
+        "anion_transference": 0.45110056184530795,
+        "transference_numbers": [
+          0.5488994381546921,
+          0.45110056184530795
+        ],
+        "collective_slope_nm2_ps": [
+          [
+            0.03960446601319804,
+            -0.011284180643208545
+          ],
+          [
+            -0.011284180643208545,
+            0.030537500164894007
+          ]
+        ],
+        "min_collective_slope_eigenvalue_nm2_ps": 0.0229101771859761,
+        "self_diffusion_m2_s": [
+          1.8487120619447349e-10,
+          1.4629116093640076e-10
+        ],
+        "sigma_NE_S_m": 0.674735734925486,
+        "transference_NE": [
+          0.5582494405875925,
+          0.4417505594124075
+        ],
+        "diagnostics": []
+      }
+    ],
+    "near_half_box_step_counts": {
+      "cation": 0,
+      "anion": 0
+    },
+    "reference_near_half_box_step_counts": []
+  },
+  "independent_variables": {
+    "composition": "Li / F / O \u5408\u6210\u6d4b\u8bd5\u7c92\u5b50",
+    "concentration": "Li:F:O = 1:1:2",
+    "architecture": "\u79bb\u6563\u7c92\u5b50\u6d4b\u8bd5\u76d2",
+    "rdf.O.peak_nm": 0.265,
+    "rdf.O.peak_height": 56.64231444364963,
+    "rdf.O.cutoff_nm": 0.34500000000000003,
+    "rdf.O.fwhm_nm": 0.06180936536812523,
+    "rdf.F.peak_nm": 0.375,
+    "rdf.F.peak_height": 1.6196290779233795,
+    "rdf.F.cutoff_nm": 0.595,
+    "rdf.F.fwhm_nm": null,
+    "coord.Li_environment.O.cutoff_nm": 0.38,
+    "coord.Li_environment.O.mean": 2.21796875,
+    "coord.Li_environment.F.cutoff_nm": 0.6,
+    "coord.Li_environment.F.mean": 0.3728515625
+  }
+}

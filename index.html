@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AtomLoom 用户演示。查看电解质设计流程，体验一份 320 帧合成轨迹的真实分析结果。">
+  <title>AtomLoom · 评审演示</title>
+  <style>
+    :root{color-scheme:light;--ink:#10283d;--muted:#516778;--line:#d8e4e9;--accent:#006e71;--accent-soft:#e6f3f1;--surface:#f4f8f9;--deep:#092a3c;--white:#fff}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--surface);color:var(--ink);font:16px/1.65 "Geist","Microsoft YaHei","PingFang SC",sans-serif}
+    a{color:inherit}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #00978f;outline-offset:4px}
+    [hidden]{display:none!important}
+    .shell{width:min(1120px,calc(100% - 48px));margin-inline:auto}
+    .masthead{font-size:.88rem;border-bottom:1px solid #ffffff24;background:var(--deep);color:#eaf7f7}
+    .masthead .shell{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:.8rem}
+    .brand{font-size:1.22rem;font-weight:750;letter-spacing:-.035em;text-decoration:none}
+    .brand span{color:#70dfd1}
+    .top-link{text-decoration:none;color:#d2e9ee}
+    .top-link:hover{text-decoration:underline}
+    .hero{background:linear-gradient(125deg,#092a3c 38%,#0a3d49 100%);color:var(--white);padding:58px 0 64px}
+    .hero-grid{display:grid;grid-template-columns:1.16fr minmax(260px,.84fr);align-items:center;gap:3.1rem}
+    h1,h2,h3,p{margin:0}
+    h1{font-size:clamp(2.05rem,5vw,3.8rem);line-height:1.15;letter-spacing:-.055em;margin-bottom:1rem}
+    h2{font-size:clamp(1.45rem,3vw,2.05rem);line-height:1.25;letter-spacing:-.027em}
+    h3{line-height:1.4}
+    .hero-copy p{color:#d6e6eb;max-width:37em}
+    .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem;margin-top:1.35rem}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;gap:.4em;padding:.43rem .85rem;border:1px solid var(--line);border-radius:7px;background:var(--white);font:inherit;font-size:.91rem;font-weight:680;color:var(--ink);text-decoration:none;cursor:pointer}
+    .button:hover{background:var(--accent-soft);border-color:#b5dbd7}
+    .button.primary{background:#006e71;color:var(--white);border-color:#006e71}
+    .button.primary:hover{background:#005b5d}
+    .hero .primary{color:#082f39;background:#86e4d8;border-color:#86e4d8}
+    .hero .primary:hover{background:#b3f0e9;color:#082f39}
+    .hero .secondary{background:transparent;border-color:#b3d2da75;color:#edf8fa}
+    .hero .secondary:hover{background:#ffffff14}
+    .case-preview{border-radius:13px;background:#eff9f8;color:var(--ink);padding:1.2rem 1.25rem;box-shadow:0 14px 42px #07233033}
+    .case-preview h2{font-size:1.05rem;margin-bottom:.35rem}
+    .case-preview p{font-size:.89rem;color:#496776}
+    .case-preview dl{display:grid;gap:.75rem;grid-template-columns:1fr 1fr;margin:.85rem 0 0;padding-top:.7rem;border-top:1px solid #cee3e5}
+    .case-preview dt{font-size:.81rem;color:#496776}
+    .case-preview dd{margin:.15rem 0 0;font-size:1.55rem;font-weight:735;letter-spacing:-.03em;white-space:nowrap}
+    .case-preview dd span{font-size:.75rem;font-weight:560;letter-spacing:0}
+    main>.shell{padding:2.3rem 0 3rem}
+    section+section{margin-top:2.35rem}
+    .section-intro{color:var(--muted);margin:.45rem 0 1rem}
+    .flow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;list-style:none;padding:0;margin:1rem 0 0}
+    .flow-card{padding:1.1rem 1rem;border:1px solid var(--line);background:var(--white);border-radius:10px;min-width:0}
+    .flow-card h3{font-size:1rem;margin-bottom:.3rem}
+    .flow-card p{color:var(--muted);font-size:.9rem}
+    .flow-card a{display:inline-block;color:var(--accent);margin-top:.65rem;font-size:.86rem;text-underline-offset:3px}
+    .workspace{display:grid;grid-template-columns:minmax(230px,.7fr) minmax(0,1.3fr);gap:1rem;align-items:start}
+    .panel{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:1rem;min-width:0}
+    .panel h3{font-size:1rem}
+    .panel details{border-top:1px solid var(--line);padding:.65rem 0}
+    .panel details:first-of-type{margin-top:.65rem}
+    .panel details:last-of-type{padding-bottom:0}
+    summary{font-weight:665;cursor:pointer}
+    .settings{margin:.4rem 0 0}
+    .settings div{display:flex;justify-content:space-between;align-items:baseline;gap:.34rem;padding:.24rem 0}
+    .settings dt{color:var(--muted);font-size:.86rem}
+    .settings dd{margin:0;text-align:right;font-size:.86rem}
+    .settings code{font-size:.8rem}
+    .graph-panel{min-height:24rem}
+    .tabs{margin:.7rem 0 .95rem;display:flex;gap:.3rem;flex-wrap:wrap}
+    .tabs a{padding:.28rem .57rem;border:1px solid var(--line);border-radius:6px;display:inline-block;font-size:.86rem;font-weight:655;text-decoration:none}
+    .tabs a:hover,.tabs a[aria-selected=true]{border-color:#a7d7d2;background:var(--accent-soft);color:#005f60}
+    .plot{display:grid;grid-template-columns:minmax(0,1fr) minmax(140px,.72fr);align-items:center;gap:.6rem;margin:.25rem 0 0}
+    .plot img{display:block;width:100%;height:auto;min-height:1px}
+    .plot figcaption{font-size:.89rem;color:var(--muted);min-width:0}
+    .plot figcaption strong{display:block;color:var(--ink);margin-bottom:.27rem}
+    .plot figcaption a{display:inline-block;margin-top:.55rem;color:var(--accent);text-underline-offset:3px}
+    .plot .settings{margin:.45rem 0}
+    .plot .settings div{padding:.16rem 0}
+    .plot .settings dd{white-space:nowrap}
+    .panel .actions{margin:.78rem 0 .2rem}
+    .footnote{color:var(--muted);font-size:.86rem;margin:.86rem 0 0}
+    .files-panel h3{margin-bottom:.35rem}
+    .files-panel p{color:var(--muted);font-size:.91rem}
+    footer{border-top:1px solid var(--line);padding:1.35rem 0 1.65rem;font-size:.86rem;color:var(--muted)}
+    footer .shell{display:flex;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+    @media(max-width:825px){.hero-grid{gap:1.5rem}.plot{grid-template-columns:1fr}.plot img{max-width:370px;margin:auto}.plot figcaption{padding:.4rem 0}}
+    @media(max-width:670px){.shell{width:calc(100% - 28px)}.hero{padding:36px 0}.hero-grid,.flow-grid,.workspace{grid-template-columns:1fr}.hero-grid{gap:1.3rem}main>.shell{padding-top:1.6rem}.case-preview{max-width:510px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="masthead" id="top"><div class="shell">
+    <a class="brand" href="#top">Atom<span>Loom</span></a>
+    <a class="top-link" href="https://hkust-gz.fun/">正式网站 ↗</a>
+  </div></header>
+  <div class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <h1>从电解质配方<br>到离子输运分析</h1>
+        <p>AtomLoom 面向电池电解质研究人员。可以设计液态、聚合物或凝胶体系、准备分子动力学模拟，再从轨迹读取配位与输运指标。</p>
+        <div class="actions">
+          <a class="button primary" href="#analysis">体验后处理算例 ↓</a>
+          <a class="button secondary" href="https://hkust-gz.fun/electrolyte">试用液态电解质设计 ↗</a>
+        </div>
+      </div>
+      <aside class="case-preview">
+        <h2>轨迹分析示例</h2>
+        <p>128 个测试粒子，320 帧合成轨迹。下列数据来自 AtomLoom 后处理结果。</p>
+        <dl>
+          <div><dt>Li–O 首峰位置</dt><dd>0.265 <span>nm</span></dd></div>
+          <div><dt>集体电导率</dt><dd>9.838 <span>mS/cm</span></dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+  <main>
+    <div class="shell">
+      <section aria-labelledby="workflow-title">
+        <h2 id="workflow-title">如何使用 AtomLoom</h2>
+        <ol class="flow-grid">
+          <li class="flow-card">
+            <h3>1. 设计配方并生成结构</h3>
+            <p>在电解质设计器选择组分，设置比例、浓度或粒子数。完成装盒后，在三维预览中检查结构并导出文件。</p>
+            <a href="https://hkust-gz.fun/electrolyte">打开电解质设计器 ↗</a>
+          </li>
+          <li class="flow-card">
+            <h3>2. 准备分子动力学模拟</h3>
+            <p>进入 GROMACS 模拟，准备匹配的结构与力场拓扑，设置最小化和平衡条件，然后导出运行包。</p>
+            <a href="https://hkust-gz.fun/md">打开 GROMACS 模拟 ↗</a>
+          </li>
+          <li class="flow-card">
+            <h3>3. 分析轨迹并下载结果</h3>
+            <p>在后处理分析中载入拓扑和轨迹，选定原子组、截断半径与拟合区间，查看并导出分析结果。</p>
+            <a href="#analysis">浏览本页算例 ↓</a>
+          </li>
+        </ol>
+      </section>
+      <section id="analysis" aria-labelledby="analysis-title">
+        <h2 id="analysis-title">体验一次轨迹后处理</h2>
+        <p class="section-intro">离线演示使用预先完成的合成轨迹算例。展开输入设置，再切换图表查看对应输出。</p>
+        <div class="workspace">
+          <div class="panel">
+            <h3>输入与设置</h3>
+            <details open>
+              <summary>拓扑与轨迹</summary>
+              <dl class="settings">
+                <div><dt>拓扑</dt><dd><code>topology.gro</code></dd></div>
+                <div><dt>轨迹</dt><dd><code>trajectory.xtc</code></dd></div>
+                <div><dt>样本</dt><dd>320 帧，间隔 1 ps</dd></div>
+                <div><dt>测试粒子</dt><dd>32 Li、32 F、64 O</dd></div>
+              </dl>
+            </details>
+            <details>
+              <summary>RDF 与配位</summary>
+              <dl class="settings">
+                <div><dt>中心</dt><dd><code>name LI</code></dd></div>
+                <div><dt>第一组目标</dt><dd><code>name O</code></dd></div>
+                <div><dt>第二组目标</dt><dd><code>name F</code></dd></div>
+                <div><dt>O 配位半径</dt><dd>0.38 nm</dd></div>
+                <div><dt>F 配位半径</dt><dd>0.60 nm</dd></div>
+              </dl>
+            </details>
+            <details>
+              <summary>电导率与迁移数</summary>
+              <dl class="settings">
+                <div><dt>温度输入</dt><dd>300 K</dd></div>
+                <div><dt>载流粒子</dt><dd>Li (+1 e)、F (−1 e)</dd></div>
+                <div><dt>参考系</dt><dd>实验室参考系</dd></div>
+                <div><dt>拟合窗口</dt><dd>20–100 ps</dd></div>
+              </dl>
+            </details>
+            <div class="actions"><a class="button" href="./example-input.zip" download>下载样例输入 ↓</a></div>
+          </div>
+          <div class="panel graph-panel">
+            <h3>分析结果</h3>
+            <nav class="tabs" aria-label="选择分析图表">
+              <a href="#rdf-o">Li–O RDF</a>
+              <a href="#rdf-f">Li–F RDF</a>
+              <a href="#coord">配位分布</a>
+              <a href="#joint">联合配位</a>
+              <a href="#transport">电导率与迁移数</a>
+            </nav>
+            <figure class="plot" id="rdf-o">
+              <img src="./case/rdf_O.png" width="972" height="972" alt="Li–O 径向分布函数，首峰位于 0.265 nm">
+              <figcaption>
+                <strong>Li⁺ 周围的氧分布</strong>
+                RDF 描述距 Li⁺ 不同距离处出现 O 的相对概率密度。
+                <dl class="settings">
+                  <div><dt>首峰位置</dt><dd>0.265 nm</dd></div>
+                  <div><dt>首峰峰高</dt><dd>56.64</dd></div>
+                  <div><dt>半高宽</dt><dd>0.06181 nm</dd></div>
+                  <div><dt>候选截断半径</dt><dd>0.345 nm</dd></div>
+                </dl>
+                <a href="./case/rdf_O.csv" download>下载曲线 CSV</a>
+              </figcaption>
+            </figure>
+            <figure class="plot" id="rdf-f">
+              <img src="./case/rdf_F.png" width="972" height="972" alt="Li–F 径向分布函数，候选首峰位于 0.375 nm">
+              <figcaption>
+                <strong>Li⁺ 周围的氟分布</strong>
+                在所选区间查找候选峰。半高交点不完整时，表中该值留空。
+                <dl class="settings">
+                  <div><dt>候选首峰位置</dt><dd>0.375 nm</dd></div>
+                  <div><dt>候选首峰峰高</dt><dd>1.620</dd></div>
+                  <div><dt>候选截断半径</dt><dd>0.595 nm</dd></div>
+                </dl>
+                <a href="./case/rdf_F.csv" download>下载曲线 CSV</a>
+              </figcaption>
+            </figure>
+            <figure class="plot" id="coord">
+              <img src="./case/coord_Li_environment.png" width="972" height="972" alt="锂周围 O 和 F 的配位数量概率分布">
+              <figcaption>
+                <strong>按目标原子统计配位</strong>
+                对每一帧和每个 Li⁺，分别统计 O 与 F 在设定半径内的数量。
+                <dl class="settings">
+                  <div><dt>平均 Li–O 配位数</dt><dd>2.218</dd></div>
+                  <div><dt>平均 Li–F 配位数</dt><dd>0.373</dd></div>
+                </dl>
+                <a href="./case/coord_Li_environment.csv" download>下载配位 CSV</a>
+              </figcaption>
+            </figure>
+            <figure class="plot" id="joint">
+              <img src="./case/coord_Li_environment_joint_01.png" width="972" height="972" alt="热图显示同一个锂离子同时具有不同 O 和 F 配位数的频率">
+              <figcaption>
+                <strong>O 和 F 的联合配位分布</strong>
+                颜色表示两种配位数在同一 Li⁺ 周围同时出现的频率。
+                <br><a href="./case/coord_Li_environment_joint_01.csv" download>下载联合配位 CSV</a>
+              </figcaption>
+            </figure>
+            <figure class="plot" id="transport">
+              <img src="./case/transport.png" width="972" height="972" alt="电荷位移的均方随相关时间的变化，标出 20 至 100 ps 的线性拟合区间">
+              <figcaption>
+                <strong>集体电荷位移拟合</strong>
+                电导率来自 20–100 ps 区间的拟合，迁移数以实验室参考系报告。
+                <dl class="settings">
+                  <div><dt>集体电导率</dt><dd>9.838 mS/cm</dd></div>
+                  <div><dt><abbr title="Nernst–Einstein">NE</abbr> 估算电导率</dt><dd>6.747 mS/cm</dd></div>
+                  <div><dt>阳离子迁移数</dt><dd>0.549</dd></div>
+                  <div><dt>阴离子迁移数</dt><dd>0.451</dd></div>
+                  <div><dt>拟合 R²</dt><dd>0.9967</dd></div>
+                </dl>
+                <a href="./case/transport_curves.csv" download>下载输运曲线 CSV</a>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <p class="footnote">样例数值仅用于检验分析流程。真实材料分析需要匹配的拓扑与轨迹，以及合适的选择、截断半径和扩散拟合窗口。</p>
+      </section>
+      <section class="panel files-panel" aria-labelledby="files-title">
+        <h3 id="files-title">下载并复查结果</h3>
+        <p>自变量表记录组分、拓扑描述和局部结构特征。因变量表记录输运指标与拟合诊断。完整结果包含图、曲线数据及计算设置。</p>
+        <div class="actions">
+          <a class="button primary" href="./example-results.zip" download>下载完整结果 ZIP ↓</a>
+          <a class="button" href="./case/independent_variables.csv" download>自变量 CSV ↓</a>
+          <a class="button" href="./case/dependent_variables.csv" download>因变量 CSV ↓</a>
+          <a class="button" href="https://hkust-gz.fun/md-postprocessing">打开正式后处理页面 ↗</a>
+        </div>
+        <p class="footnote">正式页面提交新的 HPC2 任务需要网站授权。打开本演示和下载样例无需账号。</p>
+      </section>
+    </div>
+  </main>
+  <footer><div class="shell"><span>AtomLoom · 电解质设计平台</span><a href="#top">回到顶部 ↑</a></div></footer>
+  <script>
+    const tabList = document.querySelector('.tabs');
+    const tabs = [...tabList.querySelectorAll('a')];
+    const panels = tabs.map(tab => document.querySelector(tab.hash));
+    tabList.setAttribute('role', 'tablist');
+    tabs.forEach((tab, index) => {
+      tab.id = 'result-tab-' + index;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', panels[index].id);
+      panels[index].setAttribute('role', 'tabpanel');
+      panels[index].setAttribute('aria-labelledby', tab.id);
+      tab.addEventListener('click', event => {
+        event.preventDefault();
+        activate(index);
+      });
+      tab.addEventListener('keydown', event => {
+        const directions = {ArrowLeft: -1, ArrowRight: 1, Home: -index, End: tabs.length - 1 - index};
+        if (event.key in directions) {
+          event.preventDefault();
+          const next = (index + directions[event.key] + tabs.length) % tabs.length;
+          activate(next);
+          tabs[next].focus();
+        }
+      });
+    });
+    function activate(index) {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(index === i));
+        tab.tabIndex = index === i ? 0 : -1;
+        panels[i].hidden = index !== i;
+      });
+    }
+    activate(Math.max(0, tabs.findIndex(tab => tab.hash === location.hash)));
+  </script>
+</body>
+</html>

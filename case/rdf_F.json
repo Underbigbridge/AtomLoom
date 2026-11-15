@@ -1,0 +1,16 @@
+{
+  "frames": 320,
+  "centers": 32,
+  "target_atoms": 32,
+  "eligible_ordered_pairs": 1024,
+  "normalization": "ideal_pool",
+  "cutoff_search": {
+    "status": "candidate",
+    "peak_nm": 0.375,
+    "peak_height": 1.6196290779233795,
+    "fwhm_nm": null,
+    "cutoff_nm": 0.595,
+    "smooth_bins": 7,
+    "prominence": 0.15
+  }
+}

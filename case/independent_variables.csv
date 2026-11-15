@@ -1,0 +1,16 @@
+variable,value
+composition,Li / F / O 合成测试粒子
+concentration,Li:F:O = 1:1:2
+architecture,离散粒子测试盒
+rdf.O.peak_nm,0.265
+rdf.O.peak_height,56.64231444364963
+rdf.O.cutoff_nm,0.34500000000000003
+rdf.O.fwhm_nm,0.06180936536812523
+rdf.F.peak_nm,0.375
+rdf.F.peak_height,1.6196290779233795
+rdf.F.cutoff_nm,0.595
+rdf.F.fwhm_nm,
+coord.Li_environment.O.cutoff_nm,0.38
+coord.Li_environment.O.mean,2.21796875
+coord.Li_environment.F.cutoff_nm,0.6
+coord.Li_environment.F.mean,0.3728515625
